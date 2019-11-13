@@ -88,11 +88,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\JsonObjects\PostCodeObject.cs" />
+    <Compile Include="Entities\MeteoObjects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Steps\MeteoSteps.cs" />
     <Compile Include="Steps\TutaAPITestingSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Features\Meteo.feature" />
     <None Include="Features\TutaAPITesting.feature" />
     <None Include="packages.config" />
   </ItemGroup>

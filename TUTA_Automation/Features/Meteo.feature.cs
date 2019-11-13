@@ -18,20 +18,20 @@ namespace TUTA_Automation.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("TutaAPITesting")]
-    public partial class TutaAPITestingFeature
+    [NUnit.Framework.DescriptionAttribute("Meteo")]
+    public partial class MeteoFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "TutaAPITesting.feature"
+#line 1 "Meteo.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "TutaAPITesting", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Meteo", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -71,35 +71,32 @@ namespace TUTA_Automation.Features
         
         public virtual void FeatureBackground()
         {
-#line 3
 #line 4
- testRunner.Given("I am using meteo base url \'http://api.postcodes.io/postcodes/\' value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 5
+ testRunner.Given("I am using meteo base url \'https://api.meteo.lt/v1/places/\' value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("As a Service I validate admind_district value in API Response")]
-        [NUnit.Framework.TestCaseAttribute("LS3 1EP", "200", "admind_district", "Leeds", null)]
-        [NUnit.Framework.TestCaseAttribute("NR35 2PF", "200", "region", "East of England", null)]
-        [NUnit.Framework.TestCaseAttribute("NR35 222", "404", "error", "Invalid postcode", null)]
-        public virtual void AsAServiceIValidateAdmind_DistrictValueInAPIResponse(string postCode, string responseCode, string responseObject, string responseObjectValue, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("As a Service I validate forecast value in API Response")]
+        public virtual void AsAServiceIValidateForecastValueInAPIResponse()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("As a Service I validate admind_district value in API Response", null, exampleTags);
-#line 6
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("As a Service I validate forecast value in API Response", null, ((string[])(null)));
+#line 7
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 3
+#line 4
 this.FeatureBackground();
-#line 7
- testRunner.Given(string.Format("I setup the request to GET for resource \'{0}\' value", postCode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 8
- testRunner.When("I send the meteo request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("I setup the request to GET for city resource \'kaunas/forecasts/long-term\' value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
-    testRunner.Then("I should receive meteo response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I send the meteo request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
- testRunner.And(string.Format("I should have a status code of {0}", responseCode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.Then("I should receive meteo response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 11
- testRunner.And(string.Format("I validate \'{0}\' should have \'{1}\' value", responseObject, responseObjectValue), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I should have response status code of 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 12
+ testRunner.And("I validate \'airTemperature\' content should have \'not null\' value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

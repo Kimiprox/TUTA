@@ -1,12 +1,12 @@
 ﻿Feature: TutaAPITesting
 
 Background: 
-	Given I am using the base url 'http://api.postcodes.io/postcodes/' value
+	Given I am using meteo base url 'http://api.postcodes.io/postcodes/' value
 
 Scenario Outline: As a Service I validate admind_district value in API Response
 	Given I setup the request to GET for resource '<postCode>' value
-	When I send the request
-    Then I should receive a response
+	When I send the meteo request
+    Then I should receive meteo response
 	And I should have a status code of <responseCode>
 	And I validate '<responseObject>' should have '<ResponseObjectValue>' value 
 	Examples: 
