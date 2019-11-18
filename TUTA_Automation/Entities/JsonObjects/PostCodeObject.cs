@@ -9,6 +9,8 @@ namespace TUTA_Automation.Entities.JsonObjects
     class PostCodeObject
     {
         public int status { get; set; }
+
+        public string error { get; set; }
         public Result result { get; set; }
 
         public class Result

@@ -19,6 +19,8 @@ namespace TUTA_Automation.Steps
 
         private static string _postCodeUri;
 
+        private int responseCodeValue;
+
         public static void SwapOutHttpClient(HttpClient client)
         {
             HttpClient = client;
@@ -43,12 +45,12 @@ namespace TUTA_Automation.Steps
             }
         }
 
-        [Given(@"I setup the request to GET for resource 'LS3 1EP' value")]
-        public void GivenISetupTheRequestToGETForResourceLS31EP()
+        [Given(@"I setup the request to GET for resource '(.*)' value")]
+        public void GivenISetupTheRequestToGETForResource(string postCode)
         {
             HttpRequestMessage = new HttpRequestMessage();
             HttpRequestMessage.Method = new HttpMethod("GET");
-            _postCodeUri = "LS3 1EP";
+            _postCodeUri = postCode;
         }
 
         [When(@"I send the request")]
@@ -66,23 +68,61 @@ namespace TUTA_Automation.Steps
             postCodeResult = JsonConvert.DeserializeObject<PostCodeObject>(json);
         }
 
+        [Then(@"I should have a status code of (.*)")]
+        public void ThenIShouldHaveAStatusCodeOf(int responseCode)
+        {
+            responseCodeValue = responseCode;
 
-        [Then(@"I should have a status code of 200")]
-        public void ThenIShouldHaveAStatusCodeOf200()
-        {
-            ScenarioContext.Current.Pending();
-        }
-               
-        [Then(@"I validate status should have 404 value")]
-        public void ThenIValidateStatusShouldHaveValue()
-        {
-            ScenarioContext.Current.Pending();
+            Assert.That((int)HttpResponseMessage.StatusCode, Is.EqualTo(responseCode));
         }
 
-        [Then(@"I validate admind_district should have 'Leeds' value")]
-        public void ThenIValidateAdmind_DistrictShouldHaveValue()
+        [Then(@"I validate '(.*)' should have '(.*)' value")]
+        public void ThenIValidateAdmind_DistrictShouldHaveValue(string responseVariableName, string responseValue)
         {
-            ScenarioContext.Current.Pending();
+            switch (responseVariableName)
+            {
+                case "admind_district":
+                    Assert.That(postCodeResult.result.admin_district == responseValue,
+                        "Someting went wrong! \n" +
+                        "Expected result is: '" + responseValue + "' \n" +
+                        "Actual result is: '" + postCodeResult.result.admin_district + "'.");
+                    break;
+                case "region":
+                    Assert.That(postCodeResult.result.region == responseValue,
+                        "Someting went wrong! \n" +
+                        "Expected result is: '" + responseValue + "' \n" +
+                        "Actual result is: '" + postCodeResult.result.region + "'.");
+                    break;
+                case "error":
+                    Assert.That(postCodeResult.error == responseValue,
+                        "Someting went wrong! \n" +
+                        "Expected result is: '" + responseValue + "' \n" +
+                        "Actual result is: '" + postCodeResult.error + "'.");
+                    break;
+            }
+
+            //if (responseCodeValue != 200)
+            //{
+            //    Assert.That(postCodeResult.error == responseValue,
+            //        "Someting went wrong! \n" +
+            //        "Expected result is: " + responseValue + " \n" +
+            //        "Actual result is: '" + postCodeResult.result.region + "'.");
+            //}
+            //else {
+            //    Assert.That(postCodeResult.result.region == responseValue,
+            //        "Someting went wrong! \n" +
+            //        "Expected result is: " + responseValue + " \n" +
+            //        "Actual result is: '" + postCodeResult.result.region + "'.");
+            //}
+        }
+
+        [Then(@"I validate region should have '(.*)' value")]
+        public void ThenIValidateRegionShouldHaveValue(string responseValue)
+        {
+            Assert.That(postCodeResult.result.region == responseValue,
+                "Someting went wrong! \n" +
+                "Expected result is: " + responseValue + " \n" +
+                "Actual result is: '" + postCodeResult.result.region + "'.");
         }
 
     }
