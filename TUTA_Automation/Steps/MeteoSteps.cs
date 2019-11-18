@@ -73,18 +73,5 @@ namespace TUTA_Automation.Steps
     
             Assert.That((int)HttpResponseMessage.StatusCode, Is.EqualTo(responseCode));
         }
-
-        [Then(@"I validate 'airTemperature' content should have '(.*)' value")]
-        public void ThenIValidateContentShouldHaveValue(string tempvalue)
-        {
-
-            Console.WriteLine(meteoResult.place.administrativeDivision.ToString());
-
-            
-            //Assert.That(meteoResult.forecastTimestamp.airTemperature.ToString()),
-            //"Someting went wrong! \n" +
-            //"Expected result is: " + tempvalue + " \n" +
-            //"Actual result is: '" + meteoResult.forecastTimestamp.airTemperature + "'.");
-        }
     }
 }

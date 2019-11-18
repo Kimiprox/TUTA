@@ -77,22 +77,43 @@ namespace TUTA_Automation.Steps
         }
 
         [Then(@"I validate '(.*)' should have '(.*)' value")]
-        public void ThenIValidateAdmind_DistrictShouldHaveValue(string responseObject, string responseValue)
+        public void ThenIValidateAdmind_DistrictShouldHaveValue(string responseVariableName, string responseValue)
         {
-
-            if (responseCodeValue != 200)
+            switch (responseVariableName)
             {
-                Assert.That(postCodeResult.error == responseValue,
-                    "Someting went wrong! \n" +
-                    "Expected result is: " + responseValue + " \n" +
-                    "Actual result is: '" + postCodeResult.result.region + "'.");
+                case "admind_district":
+                    Assert.That(postCodeResult.result.admin_district == responseValue,
+                        "Someting went wrong! \n" +
+                        "Expected result is: '" + responseValue + "' \n" +
+                        "Actual result is: '" + postCodeResult.result.admin_district + "'.");
+                    break;
+                case "region":
+                    Assert.That(postCodeResult.result.region == responseValue,
+                        "Someting went wrong! \n" +
+                        "Expected result is: '" + responseValue + "' \n" +
+                        "Actual result is: '" + postCodeResult.result.region + "'.");
+                    break;
+                case "error":
+                    Assert.That(postCodeResult.error == responseValue,
+                        "Someting went wrong! \n" +
+                        "Expected result is: '" + responseValue + "' \n" +
+                        "Actual result is: '" + postCodeResult.error + "'.");
+                    break;
             }
-            else {
-                Assert.That(postCodeResult.result.region == responseValue,
-                    "Someting went wrong! \n" +
-                    "Expected result is: " + responseValue + " \n" +
-                    "Actual result is: '" + postCodeResult.result.region + "'.");
-            }
+
+            //if (responseCodeValue != 200)
+            //{
+            //    Assert.That(postCodeResult.error == responseValue,
+            //        "Someting went wrong! \n" +
+            //        "Expected result is: " + responseValue + " \n" +
+            //        "Actual result is: '" + postCodeResult.result.region + "'.");
+            //}
+            //else {
+            //    Assert.That(postCodeResult.result.region == responseValue,
+            //        "Someting went wrong! \n" +
+            //        "Expected result is: " + responseValue + " \n" +
+            //        "Actual result is: '" + postCodeResult.result.region + "'.");
+            //}
         }
 
         [Then(@"I validate region should have '(.*)' value")]

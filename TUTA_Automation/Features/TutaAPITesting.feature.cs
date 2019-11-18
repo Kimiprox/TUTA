@@ -73,7 +73,7 @@ namespace TUTA_Automation.Features
         {
 #line 3
 #line 4
- testRunner.Given("I am using meteo base url \'http://api.postcodes.io/postcodes/\' value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I am using the base url \'http://api.postcodes.io/postcodes/\' value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
         
@@ -93,9 +93,9 @@ this.FeatureBackground();
 #line 7
  testRunner.Given(string.Format("I setup the request to GET for resource \'{0}\' value", postCode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 8
- testRunner.When("I send the meteo request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I send the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 9
-    testRunner.Then("I should receive meteo response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("I should receive a response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 10
  testRunner.And(string.Format("I should have a status code of {0}", responseCode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11

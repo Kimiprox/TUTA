@@ -9,4 +9,9 @@ Scenario: As a Service I validate forecast value in API Response
 	When I send the meteo request
     Then I should receive meteo response
 	And I should have response status code of 200
-	And I validate 'airTemperature' content should have 'not null' value 
+
+	#1 Exercise. Add additional assertion to validate choosen value
+	
+	#2 Exercise. Add negative test case
+	
+	#3 Exercise. Update test case ussing 'Outline and Examples'  
