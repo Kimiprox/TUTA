@@ -43,12 +43,12 @@ namespace TUTA_Automation.Steps
             }
         }
 
-        [Given(@"I setup the request to GET for resource 'LS3 1EP' value")]
-        public void GivenISetupTheRequestToGETForResourceLS31EP()
+        [Given(@"I setup the request to GET for resource '(.*)' value")]
+        public void GivenISetupTheRequestToGETForResource(string postCode)
         {
             HttpRequestMessage = new HttpRequestMessage();
             HttpRequestMessage.Method = new HttpMethod("GET");
-            _postCodeUri = "LS3 1EP";
+            _postCodeUri = postCode;
         }
 
         [When(@"I send the request")]
@@ -67,23 +67,38 @@ namespace TUTA_Automation.Steps
         }
 
 
-        [Then(@"I should have a status code of 200")]
-        public void ThenIShouldHaveAStatusCodeOf200()
+     
+        [Then(@"I should have a status code of '(.*)'")]
+        public void ThenIShouldHaveAStatusCodeOf(int StatusCode)
         {
-            ScenarioContext.Current.Pending();
+            Assert.That((int)HttpResponseMessage.StatusCode, Is.EqualTo(StatusCode));
         }
                
-        [Then(@"I validate status should have 404 value")]
-        public void ThenIValidateStatusShouldHaveValue()
-        {
-            ScenarioContext.Current.Pending();
-        }
+        //[Then(@"I validate status should have 404 value")]
+        //public void ThenIValidateStatusShouldHaveValue()
+        //{
+        //    ScenarioContext.Current.Pending();
+        //}
 
         [Then(@"I validate admind_district should have 'Leeds' value")]
         public void ThenIValidateAdmind_DistrictShouldHaveValue()
         {
-            ScenarioContext.Current.Pending();
+            Assert.That(postCodeResult.result.admin_district == "Leeds",
+                "Something went wrong! \n" +
+                "Expected result is: Leeds \n" +
+                "Actual result is: '" + postCodeResult.result.admin_district + "'.");
         }
+
+       
+        [Then(@"I validate region should have '(.*)' value")]
+        public void ThenIValidateRegionShouldHaveValue(string p0)
+        {
+            Assert.That(postCodeResult.result.region == "Yorkshire and The Humber",
+                 "Something went wrong! \n" +
+                 "Expected result is: Yorkshire and The Humber \n" +
+                 "Actual result is: '" + postCodeResult.result.region + "'.");
+        }
+
 
     }
 }
