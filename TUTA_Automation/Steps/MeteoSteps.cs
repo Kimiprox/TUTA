@@ -73,5 +73,45 @@ namespace TUTA_Automation.Steps
     
             Assert.That((int)HttpResponseMessage.StatusCode, Is.EqualTo(responseCode));
         }
+
+        [Then(@"I validate condition Code content should have '(.*)' value")]
+        public void ThenIValidateContentShouldHaveValue(string condition)
+
+        {
+            Assert.That(meteoResult.forecastTimestamp.conditionCode, Is.Not.Empty,
+            "Something went wrong!\n" +
+            "Expected result is: "+ condition +"\n" +
+            "Actual result is: '" + meteoResult.forecastTimestamp.conditionCode + "'.");
+        }
+
+        [Then(@"I validate place code content should have '(.*)' value")]
+        public void ThenIValidateCodeValue(string codeval)
+
+        {
+            Assert.That(meteoResult.place.country, Is.Not.Empty,
+            "Something went wrong!\n" +
+            "Expected result is: " + codeval + "\n" +
+            "Actual result is: '" + meteoResult.place.country + "'.");
+        }
+
+        [Then(@"I validate place country content should have '(.*)' value")]
+        public void ThenIValidateCountryValue(string countryval)
+
+        {
+            Assert.That(meteoResult.place.country, Is.Empty,
+            "Something went wrong!\n" +
+            "Expected result is: "+countryval+"\n" +
+            "Actual result is: '" + meteoResult.place.country + "'.");
+        }
+
+        [Then(@"I validate place name should have (.*) value")]
+        public void ThenIValidatePlaceNameShouldHaveValue(string name)
+        {
+            Assert.That(meteoResult.place.name == name,
+            "Something went wrong!\n" + 
+           "Expected result is: " + name + "\n" +
+            "Actual result is: '" + meteoResult.place.name + "'.");
+        }
     }
 }
+
