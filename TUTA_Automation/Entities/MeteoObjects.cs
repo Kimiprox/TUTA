@@ -4,9 +4,19 @@ namespace TUTA_Automation
 {
     class MeteoObject
     {
+        internal object result;
+
         public ForecastTimestamp forecastTimestamp { get; set; }
 
+        public Error error { get; set; }
+
         public Place place { get; set; }
+
+        public class Error { 
+        public int code { get; set; }
+        public string message { get; set; }
+
+        }
 
         public class Coordinates
         {

@@ -13,12 +13,13 @@ namespace TUTA_Automation.Steps
         public static HttpClient HttpClient { get; private set; }
         public static HttpRequestMessage HttpRequestMessage { get; private set; }
         public static HttpResponseMessage HttpResponseMessage { get; private set; }
-
-        internal static MeteoObject MeteoReults { get => meteoResult; set => meteoResult = value; }
+        internal static MeteoObject MeteoResults { get => meteoResult; set => meteoResult = value; }
 
         private static MeteoObject meteoResult = new MeteoObject() { };
 
         private static string _cityUri;
+
+        private int responseCodeValue;
 
         public static void SwapOutHttpClient(HttpClient client)
         {
@@ -70,8 +71,39 @@ namespace TUTA_Automation.Steps
         [Then(@"I should have response status code of (.*)")]
         public void ThenIShouldHaveResponseStatusCodeOf(int responseCode)
         {
-    
+            responseCodeValue = responseCode;
             Assert.That((int)HttpResponseMessage.StatusCode, Is.EqualTo(responseCode));
+        }
+
+        [Then(@"I validate of '(.*)' should have '(.*)' value")]
+        public void ThenIValidateOfShouldHaveValue(string responseVariableName, string responseValue)
+        {
+
+            switch (responseVariableName)
+            {
+                case "administrativeDivision":
+                    Assert.That(meteoResult.place.administrativeDivision == responseValue,
+                         "Someting went wrong! \n" +
+                        "Expected result is: '" + responseValue + "' \n" +
+                        "Actual result is: '" + meteoResult.place.administrativeDivision + "'.");
+                    break;
+
+                 case "longitude":
+                    Assert.That(meteoResult.place.coordinates.longitude.ToString() == responseValue,
+                         "Someting went wrong! \n" +
+                        "Expected result is: '" + responseValue + "' \n" +
+                        "Actual result is: '" + meteoResult.place.coordinates.longitude + "'.");
+                 break;
+
+                case "error":
+                    Assert.That(meteoResult.error.message == responseValue,
+                        "Someting went wrong! \n" +
+                        "Expected result is: '" + responseValue + "' \n" +
+                        "Actual result is: '" + meteoResult.error + "'.");
+                    break;
+
+
+            }
         }
     }
 }

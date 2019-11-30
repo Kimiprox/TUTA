@@ -71,8 +71,8 @@ namespace TUTA_Automation.Features
         
         public virtual void FeatureBackground()
         {
+#line 3
 #line 4
-#line 5
  testRunner.Given("I am using meteo base url \'https://api.meteo.lt/v1/places/\' value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
@@ -82,21 +82,73 @@ namespace TUTA_Automation.Features
         public virtual void AsAServiceIValidateForecastValueInAPIResponse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("As a Service I validate forecast value in API Response", null, ((string[])(null)));
-#line 7
+#line 6
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 4
+#line 3
 this.FeatureBackground();
-#line 8
+#line 7
  testRunner.Given("I setup the request to GET for city resource \'kaunas/forecasts/long-term\' value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 9
+#line 8
  testRunner.When("I send the meteo request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 10
+#line 9
     testRunner.Then("I should receive meteo response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 11
+#line 10
  testRunner.And("I should have response status code of 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 11
+ testRunner.And("I validate of \'administrativeDivision\' should have \'Kauno miesto savivaldybė\' val" +
+                    "ue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
- testRunner.And("I validate \'airTemperature\' content should have \'not null\' value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I validate of \'longitude\' should have \'23.904482\' value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("As a Service I validate forecast false value in API Response")]
+        public virtual void AsAServiceIValidateForecastFalseValueInAPIResponse()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("As a Service I validate forecast false value in API Response", null, ((string[])(null)));
+#line 14
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 3
+this.FeatureBackground();
+#line 15
+ testRunner.Given("I setup the request to GET for city resource \'kavnas/forecasts/long-term\' value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 16
+ testRunner.When("I send the meteo request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 17
+    testRunner.Then("I should receive meteo response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 18
+ testRunner.And("I should have response status code of 404", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("As a Service I validate forecast value in Kaunas in API Response")]
+        [NUnit.Framework.TestCaseAttribute("kaunas/forecasts/long-term", "200", "administrativeDivision", "Kauno miesto savivaldybė", null)]
+        [NUnit.Framework.TestCaseAttribute("kaunas/forecasts/long-term", "200", "longitude", "23.904482", null)]
+        [NUnit.Framework.TestCaseAttribute("kavnas/forecasts/long-term", "404", "error", "Not Found", null)]
+        public virtual void AsAServiceIValidateForecastValueInKaunasInAPIResponse(string cityResource, string responseCode, string responseObject, string responseObjectValue, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("As a Service I validate forecast value in Kaunas in API Response", null, exampleTags);
+#line 20
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 3
+this.FeatureBackground();
+#line 21
+ testRunner.Given(string.Format("I setup the request to GET for city resource \'{0}\' value", cityResource), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 22
+ testRunner.When("I send the meteo request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 23
+    testRunner.Then("I should receive meteo response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 24
+ testRunner.And(string.Format("I should have response status code of {0}", responseCode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 25
+ testRunner.And(string.Format("I validate of \'{0}\' should have \'{1}\' value", responseObject, responseObjectValue), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
