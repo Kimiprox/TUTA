@@ -50,7 +50,6 @@ namespace TUTA_Automation.Steps
             HttpRequestMessage = new HttpRequestMessage();
             HttpRequestMessage.Method = new HttpMethod("GET");
             _cityUri = cityValue;
-
         }
 
         [When(@"I send the meteo request")]
